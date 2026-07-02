@@ -10,7 +10,7 @@ namespace LibraryManagementSystem.Models
 
         public Book Book { get; set; } = null!;
 
-        public PremiumMember Member { get; set; } = null!;
+        public Member Member { get; set; } = null!;
 
         public DateTime BorrowDate { get; set; }
 
@@ -18,15 +18,9 @@ namespace LibraryManagementSystem.Models
 
         public bool IsLate()
         {
-           
-            if (ReturnDate == null)
-            {
-               
-                return DateTime.Now > BorrowDate.AddDays(Member.LoanDays);
-            }
 
-            
-            return ReturnDate > BorrowDate.AddDays(Member.LoanDays);
+            return ReturnDate == null &&
+               (DateTime.Now - BorrowDate).TotalDays > 14;
         }
     }
 }

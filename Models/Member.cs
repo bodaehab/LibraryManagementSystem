@@ -16,15 +16,17 @@ namespace LibraryManagementSystem.Models
 
         public virtual string GetInfo()
         {
-            return $"Premium Member: {Name} | Email: {Email} | " +
+            return $" Member: {Name} | Email: {Email} | " +
               $"\nDate: {JoinDate} ";
 
         }
 
         public bool MatchesQuery(string query)
         {
-            return Name.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-               Email.Contains(query, StringComparison.OrdinalIgnoreCase);
+            query = query.ToLower();
+
+            return Name.ToLower().Contains(query) ||
+                   Email.ToLower().Contains(query);
         }
     }
 }

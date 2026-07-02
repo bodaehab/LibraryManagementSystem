@@ -19,17 +19,18 @@ namespace LibraryManagementSystem.Models
             Genre = genre;
             IsAvailable = isAvailable;
         }
-        public bool MatchesQuery(string query)
-        {
-            return Title.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-              Author.Contains(query, StringComparison.OrdinalIgnoreCase);
-        }
+      
 
         public override string GetInfo()
         {
             string Avaliable = IsAvailable  ? "Available" : "not Available";
 
             return $"({Id})Book: {Title} by {Author} ({Year}) AddedTime:{AddedDate:N0} Genre:{Genre} IsAvaliable:{Avaliable}";
+        }
+
+        public bool MatchesQuery(string query)
+        {
+            throw new NotImplementedException();
         }
     }
 }
