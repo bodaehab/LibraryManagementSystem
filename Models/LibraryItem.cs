@@ -9,11 +9,11 @@ namespace LibraryManagementSystem.Models
         public int Id { get; set; }
         public string? Title { get; set; }
         public DateTime AddedDate { get; set; }
-        protected LibraryItem(int id, string? title)
+        protected LibraryItem(int id, string? title,DateTime dateTime)
         {
             Id = id;
             Title = title;
-            AddedDate = DateTime.Now;
+            AddedDate = dateTime;
         }
         public  abstract string GetInfo();
 

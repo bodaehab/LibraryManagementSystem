@@ -12,13 +12,37 @@ namespace LibraryManagementSystem.Models
 
         public string Email { get; set; }=string.Empty;
         public DateTime JoinDate { get; set; }
-        public Book[] BorrowedBooks { get; set; } = Array.Empty<Book>();
+        public Book[] BorrowedBooks { get; set; } 
 
+
+
+        public Member()
+        {
+            BorrowedBooks = new Book[5]; 
+        }
         public virtual string GetInfo()
         {
-            return $" Member: {Name} | Email: {Email} | " +
-              $"\nDate: {JoinDate} ";
+            string borrowedBooksInfo;
+            if (BorrowedBooks == null) {
 
+                borrowedBooksInfo = "None";
+            }
+            else
+            {
+                borrowedBooksInfo = string.Join(", ",
+            BorrowedBooks
+                .Where(b => b != null)
+                .Select(b => b.Title));
+            }
+        
+           
+            return $"ID: {Id}\n" +
+                   $"Name: {Name}\n" +
+                   $"Email: {Email}\n" +
+                   $"Join Date: {JoinDate:d}\n"+
+                   $" Borrowed Books: \n[{borrowedBooksInfo}]";
+
+            
         }
 
         public bool MatchesQuery(string query)

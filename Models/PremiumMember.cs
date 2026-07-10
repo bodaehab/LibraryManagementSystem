@@ -7,13 +7,20 @@ namespace LibraryManagementSystem.Models
 {
     internal class PremiumMember : Member
     {
-        public int MaxBorrowLimit { get; set; } = 10;
-        public int LoanDays { get; set; } = 30;
+        public int MaxBorrowLimit { get;  } = 10;
+        public int LoanDays { get;  } = 30;
+
+
+        public PremiumMember() {
+        BorrowedBooks=new Book[MaxBorrowLimit];
+        }
 
         public override string GetInfo()
         {
-            return $"Premium Member: {Name} | Email: {Email} | " +
-                   $"\nBorrow Limit: {MaxBorrowLimit} | Loan Days: {LoanDays}";
+            return base.GetInfo() +
+                  $"\nMember Type: Premium" +
+                  $"\nMax Borrow Limit: {MaxBorrowLimit}" +
+                  $"\nLoan Days: {LoanDays}";
         }
     }
 }

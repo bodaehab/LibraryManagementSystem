@@ -11,8 +11,8 @@ namespace LibraryManagementSystem.Models
         public int Year { get; set; }
         public string Genre { get; set; }
         public bool IsAvailable { get; set; }
-        public Book(int id, string title, string author, int year,string genre,bool isAvailable)
-        : base(id, title)
+        public Book(int id, string title, string author, int year,string genre,DateTime addedDate,bool isAvailable)
+        : base(id, title, addedDate)
         {
             Author = author;
             Year = year;
@@ -25,12 +25,16 @@ namespace LibraryManagementSystem.Models
         {
             string Avaliable = IsAvailable  ? "Available" : "not Available";
 
-            return $"({Id})Book: {Title} by {Author} ({Year}) AddedTime:{AddedDate:N0} Genre:{Genre} IsAvaliable:{Avaliable}";
+            return $"({Id}) Book: {Title} by {Author} ({Year}) AddedTime:{AddedDate:N0} Genre:{Genre} IsAvaliable:{Avaliable}";
         }
 
         public bool MatchesQuery(string query)
         {
-            throw new NotImplementedException();
+            query = query.ToLower();
+
+            return Title!.ToLower().Contains(query) ||
+                   Author.ToLower().Contains(query) ||
+                   Genre.ToLower().Contains(query);
         }
     }
 }

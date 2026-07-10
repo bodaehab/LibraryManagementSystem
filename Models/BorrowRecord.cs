@@ -16,11 +16,13 @@ namespace LibraryManagementSystem.Models
 
         public DateTime? ReturnDate { get; set; }
 
+
         public bool IsLate()
         {
+            int loanDays = Member is PremiumMember premiumMember? premiumMember.LoanDays: 14;
 
-            return ReturnDate == null &&
-               (DateTime.Now - BorrowDate).TotalDays > 14;
+            return (DateTime.Now - BorrowDate).TotalDays > loanDays;
+        
         }
     }
 }
